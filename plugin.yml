@@ -1,0 +1,23 @@
+name: Te4hno_Religions
+main: plus.Religions_Core
+version: "1.0"
+author: Te4hnoPlus
+description: "Religions by Te4hnoPlus"
+
+depend: [PlaceholderAPI]
+softdepend: [PlaceholderAPI]
+commands:
+    relig:
+        description: Control your profile.
+        usage: /set <args>
+        aliases: [religion,rel,myrel,myrelig,myreligion]  
+permissions:
+    relig.set:
+        default: "op"
+    relig.reset:
+        default: "op"
+    relig.*:
+        default: "op"
+        children:
+            relig.set: true
+            relig.reset: true

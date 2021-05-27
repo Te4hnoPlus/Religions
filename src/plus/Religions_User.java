@@ -24,13 +24,12 @@ public class Religions_User {
 		} catch (SQLException e) {
 			religion = "none";
 		}
-		//System.out.println(player.getName());
 	}
-	
 	
 	public String getReligion() {
 		return religion;
 	}
+	
 	public void setReligion(String newreligion) {
 		setImeg(Religions_Core.getPlConfig().getString(newreligion+".imeg"));
 		religion = newreligion;

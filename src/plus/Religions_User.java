@@ -6,9 +6,9 @@ import org.bukkit.entity.Player;
 
 public class Religions_User {
 	
-	private static Player user;
-	private static String religion;
-	private static String imeg;
+	private Player user;
+	private String religion;
+	private String imeg;
 	
 	public Religions_User(Player player) {
 		user = player;
@@ -23,7 +23,8 @@ public class Religions_User {
 			
 		} catch (SQLException e) {
 			religion = "none";
-		}	
+		}
+		//System.out.println(player.getName());
 	}
 	
 	
@@ -33,6 +34,12 @@ public class Religions_User {
 	public void setReligion(String newreligion) {
 		setImeg(Religions_Core.getPlConfig().getString(newreligion+".imeg"));
 		religion = newreligion;
+		String newimeg = Religions_Core.getPlConfig().getString(religion+".imeg");
+		if(newimeg != null) {
+			imeg = newimeg;
+		} else {
+			imeg =  " ";
+		}
 	}
 	public Player toPlayer() {
 		return user;
@@ -41,8 +48,8 @@ public class Religions_User {
 	public String getImeg() {
 		return imeg;
 	}
-	public void setImeg(String imeg) {
-		Religions_User.imeg = imeg;
+	public void setImeg(String newimeg) {
+		imeg = newimeg;
 	}
 	public boolean hasReligion() {
 		if(religion.equals("none")) {

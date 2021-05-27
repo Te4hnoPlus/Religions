@@ -71,7 +71,8 @@ public class Religions_Core extends JavaPlugin {
         return;
     }
 	
-	
+	public int balset = getConfig().getInt("NeedMoney_ReSet");
+	public int balreset = getConfig().getInt("NeedMoney_Set");
 	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -105,16 +106,20 @@ public class Religions_Core extends JavaPlugin {
 			int newbalminus;
 			
 			if(user.hasReligion()) {
-				newbalminus = getConfig().getInt("NeedMoney_ReSet");
-				if(playermoney<newbalminus) {
+				//newbalminus = getConfig().getInt("NeedMoney_ReSet");
+				if(playermoney<balreset) {
 					player.sendMessage(getConfig().getString("Message_NoMoney"));
 					return true;
-				} 
+				} else {
+					newbalminus = balreset;
+				}
 			} else {
-				newbalminus = getConfig().getInt("NeedMoney_Set");
-				if(playermoney<newbalminus) {
+				//newbalminus = getConfig().getInt("NeedMoney_Set");
+				if(playermoney<balset) {
 					player.sendMessage(getConfig().getString("Message_NoMoney"));
 					return true;
+				} else {
+					newbalminus = balset;
 				}
 			}
 
@@ -144,6 +149,7 @@ public class Religions_Core extends JavaPlugin {
 		if(args[0].equals("get")) {
 			//Religions_User user = Religions_Data.getUser(player);
 			player.sendMessage(user.getReligion());
+			return true;
 		}
 		
 		return true;

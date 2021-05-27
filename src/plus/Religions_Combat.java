@@ -1,10 +1,16 @@
 package plus;
 
+
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 //import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+//import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
+import org.bukkit.event.entity.PlayerDeathEvent;
+
+
+
 
 public class Religions_Combat implements Listener {
 	@EventHandler
@@ -12,11 +18,16 @@ public class Religions_Combat implements Listener {
 		//if(e.getEntity() instanseof Player) 
 			
 		if(e.getEntity() instanceof Player && e.getDamager() instanceof Player) {
+			
+			
+			
 			Player player = (Player) e.getEntity();
+			Player damager = (Player) e.getDamager();
 			
 			Religions_User user = Religions_Data.getUser(player);
+			Religions_User damg = Religions_Data.getUser(damager);
 			
-			String param = Religions_Core.getPlConfig().getString(user.getReligion()+".resist");
+			String param = Religions_Core.getPlConfig().getString(user.getReligion()+".damag."+damg.getReligion());
 			
 			if(param != null) {
 				Religions_Core.runEffect((Player) e.getDamager(), param);
@@ -24,5 +35,34 @@ public class Religions_Combat implements Listener {
 				
 		}
 	}
+	public void opPlayerKill(PlayerDeathEvent e){
+		
+		//Player  player = e.getEntity();
+		//Player damager = e.getEntity().getKiller();
+		
+		if(e.getEntity().getKiller() == null) {
+			return;
+		}
+		if(!(e.getEntity().getKiller() instanceof Player)) {
+			return;
+		}
+		
+		Religions_User user = Religions_Data.getUser(e.getEntity());
+		Religions_User damg = Religions_Data.getUser(e.getEntity().getKiller());
+		
+	
+		
+		String param = Religions_Core.getPlConfig().getString(user.getReligion()+".death."+damg.getReligion());
+		
+		if(param != null) {
+			Religions_Core.runEffect(e.getEntity().getKiller(), param);
+		}
+		
+		
+		
+	}
+	
+	
+	
 
 }

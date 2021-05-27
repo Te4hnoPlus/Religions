@@ -15,15 +15,16 @@ public class Religions_Data {
 		
 		//System.out.println("Добавлен юзер");//
 		
-		Religions_User user = new Religions_User(player);
+		//Religions_User user = new Religions_User(player);
 		
-		data.put(player, user);
+		data.put(player, new Religions_User(player));
 		
-		//System.out.println(data.get(player));//
+		//System.out.println(data.size());//
 		
 	}
 	
 	public static Religions_User getUser(Player player) {
+		
 		return data.get(player);
 	}
 	

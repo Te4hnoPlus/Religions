@@ -28,8 +28,7 @@ public class Religions_Core extends JavaPlugin {
 			saveDefaultConfig();
 		}
 		config = getConfig();
-		//System.out.println("успех");
-		//Religions_Sqlite.Conn();
+
 		try {
 			Religions_Sqlite.Conn();
 			Religions_Sqlite.CreateDB();
@@ -46,33 +45,34 @@ public class Religions_Core extends JavaPlugin {
 		setupEconomy();
 		
 		allowedreligions = config.getStringList("Religions_List");
-		System.out.println(String.valueOf(allowedreligions.size())+" Религий загружено.");
-		
-		
-		//getServer().dispatchCommand(getServer().getConsoleSender(), "command goes here");
-		
-		
+		System.out.println(String.valueOf(allowedreligions.size())+" ГђГҐГ«ГЁГЈГЁГ© Г§Г ГЈГ°ГіГ¦ГҐГ­Г®.");
+			
 	}
+	
 	private void setupEconomy() {
+		
         if (getServer().getPluginManager().getPlugin("Vault") == null) {
-        	System.out.println("Vault не обнаружен");
+        	System.out.println("Vault Г­ГҐ Г®ГЎГ­Г Г°ГіГ¦ГҐГ­");
             return;
         } else {
-        	System.out.println("Vault обнаружен");
+        	System.out.println("Vault Г®ГЎГ­Г Г°ГіГ¦ГҐГ­");
         }
+		
         RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
+		
         if (rsp == null) {
-        	System.out.println("Проводник экономики не обнаружен");
+        	System.out.println("ГЏГ°Г®ГўГ®Г¤Г­ГЁГЄ ГЅГЄГ®Г­Г®Г¬ГЁГЄГЁ Г­ГҐ Г®ГЎГ­Г Г°ГіГ¦ГҐГ­");
             return;
         } else {
-        	System.out.println("Проводник экономики обнаружен");
+        	System.out.println("ГЏГ°Г®ГўГ®Г¤Г­ГЁГЄ ГЅГЄГ®Г­Г®Г¬ГЁГЄГЁ Г®ГЎГ­Г Г°ГіГ¦ГҐГ­");
         }
         econ = rsp.getProvider();
         return;
-    }
+    	}
 	
 	public int balset = getConfig().getInt("NeedMoney_ReSet");
 	public int balreset = getConfig().getInt("NeedMoney_Set");
+	
 	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -96,17 +96,13 @@ public class Religions_Core extends JavaPlugin {
 				player.sendMessage(getConfig().getString("Message_Wrong"));
 				return true;
 			}
-				
-			//econ.format(econ.getBalance(player.getName()))
 			
 			double playermoney = econ.getBalance(player.getName());
-			//if(aa>100) {
-				
-			//}	
+	
 			int newbalminus;
 			
 			if(user.hasReligion()) {
-				//newbalminus = getConfig().getInt("NeedMoney_ReSet");
+
 				if(playermoney<balreset) {
 					player.sendMessage(getConfig().getString("Message_NoMoney"));
 					return true;
@@ -114,7 +110,7 @@ public class Religions_Core extends JavaPlugin {
 					newbalminus = balreset;
 				}
 			} else {
-				//newbalminus = getConfig().getInt("NeedMoney_Set");
+
 				if(playermoney<balset) {
 					player.sendMessage(getConfig().getString("Message_NoMoney"));
 					return true;
@@ -127,11 +123,10 @@ public class Religions_Core extends JavaPlugin {
 			
 				user.setReligion(args[1]);
 				
-				//econ.depositPlayer(player, -newbalminus);
 				econ.withdrawPlayer(player, newbalminus);
 				
 				try {
-					//System.out.println("Сохранено в ДБ");
+
 					Religions_Sqlite.saveData(player.getName(), args[1]);
 				} catch (SQLException e) {
 					e.printStackTrace();
@@ -147,7 +142,7 @@ public class Religions_Core extends JavaPlugin {
 		}
 		
 		if(args[0].equals("get")) {
-			//Religions_User user = Religions_Data.getUser(player);
+
 			player.sendMessage(user.getReligion());
 			return true;
 		}

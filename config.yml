@@ -10,6 +10,7 @@
 #RAW_FISH COOKED_FISH COOKED_CHICKEN POTATO_ITEM MUTTON
 #APPLE GRILLED_PORK GOLDEN_APPLE BAKED_POTATO COOKED_RABBIT
 #RAW_CHICKEN ROTTEN_FLESH CARROT_ITEM RABBIT RABBIT_STEW
+#GRILLED_PORK PORK
 
 #Управление балансом
 
@@ -24,12 +25,12 @@ Message_Set: "Религия выбрана"
 Message_ReSet: "Религия перевыбрана"
 Message_Wrong: "Данной религии не существует"
 Message_Success: "Ваша религия изменена"
-Message_NoMoney: "Вам не хватает бабла (Как и мне сейчас) ибо админ жмот и оплаченной суммы едва ли хватит на еду, потраченную на разработку плагина"
+Message_NoMoney: "Вам не хватает бабла (Как и мне сейчас)"
 
 #Список доступных религий
 
 Religions_List:
-  #Данное можно получить через %religions_name%
+  #Данную строку можно получить через %religions_name%
   - Defаult
   - Tester
 
@@ -39,15 +40,19 @@ Defаult:
     #Данную строку можно получить через %religions_imeg%
     imeg: "Тест"
     
-    #Защитный эффект у игроков, определенной религии.
-    resist: " minecraft:health_boost 10 2"
+    #Защитный атакующий эффект у игроков, против определенной религии
+    damag:
+        Defаult: " minecraft:health_boost 10 2"
+        Tester: " minecraft:health_boost 101 2"
     
-    #Аргументы для команды /effect give <Player> 
-    #Пробел в начале строки обязателен! 
-    #Мне лень делать дубликат конфига с исправленными строками
-    #Так что прошу писать изначально правильно
+    #Посмертный приговор (Накладывает на убийцу эффект)
+    death:
+        Defаult: " minecraft:health_boost 10 2"
+        Tester: " minecraft:health_boost 101 2"
     
-    BREAD: " minecraft:health_boost 10 2"
+    #эффекты при употреблении пищи
+    food:
+        BREAD: " minecraft:health_boost 10 2"
     
     
     

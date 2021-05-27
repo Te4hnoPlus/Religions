@@ -39,7 +39,7 @@ public class Religions_Papi extends PlaceholderExpansion {
 			if(User.hasReligion()) {
 				return User.getReligion();
 			} else {
-				return "Нет религии";
+				return "ГЌГҐГІ Г°ГҐГ«ГЁГЈГЁГЁ";
 				}
         }
 		if(identifier.equals("imeg")){
@@ -49,14 +49,6 @@ public class Religions_Papi extends PlaceholderExpansion {
 				return " ";
 			}
         }	
-        //switch (identifier) {
-        //	case "name":{
-        //		return User.getReligion();
-        //	}
-        //	case "imeg":{
-        //		return User.getImeg();
-        //	}
-        //}
         
 		return null;
 	}
